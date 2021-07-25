@@ -1,0 +1,41 @@
+language: generic
+
+services:
+  - docker
+
+before_install:
+  - #Various automated test cases
+  - # python functional testcases
+
+
+deploy:
+  - provider: elasticbeanstalk
+    access_key_id: $AWS_ACCESS_KEY
+    secret_access_key: $AWS_SECRET_KEY
+    region: "ap-south-1"
+    app: "static-app-testing"
+    env: "Staticapptesting-env"
+    bucket_name: "prasanna-static-app-to-be-deleted"
+    bucket_path: "testing"
+    on:
+      branch: testing
+  - provider: elasticbeanstalk
+    access_key_id: $AWS_ACCESS_KEY
+    secret_access_key: $AWS_SECRET_KEY
+    region: "ap-south-1"
+    app: "static-app-int"
+    env: "Staticappint-env"
+    bucket_name: "prasanna-static-app-to-be-deleted"
+    bucket_path: "staging"
+    on:
+      branch: staging
+  - provider: elasticbeanstalk
+    access_key_id: $AWS_ACCESS_KEY
+    secret_access_key: $AWS_SECRET_KEY
+    region: "ap-south-1"
+    app: "static-app-production"
+    env: "Staticappproduction-env"
+    bucket_name: "prasanna-static-app-to-be-deleted"
+    bucket_path: "main"
+    on:
+      branch: main
